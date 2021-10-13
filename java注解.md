@@ -161,7 +161,66 @@ public enum RetentionPolicy {
         return "red";
     }
 
-
 ```
 
 ### 3.4 解析注解
+
+概念：通过反射获取类、函数或成员上的运行时注解信息，从而实现动态控制程序运行的逻辑。
+
+```java
+
+@Description("I am 类上的注解")
+public class TestAnnotation {
+
+
+    @Description("I am 方法上的注解")
+    public String eyeColor(){
+        return "red";
+    }
+
+}
+
+
+public class ParseAnn {
+
+    public static void main(String[] args) {
+
+        try {
+            Class<?> c = Class.forName("com.spring.kfma.domain.TestAnnotation");
+
+            //获取类上的注解
+            boolean annotationPresent = c.isAnnotationPresent(Description.class);
+            if (annotationPresent){
+                Description annotation = c.getAnnotation(Description.class);
+                System.out.println("value="+annotation.value());
+            }
+
+            //获取方法上的注解
+            Method[] methods = c.getMethods();
+            for (Method m:methods){
+                if (m.isAnnotationPresent(Description.class)){
+                    Description annotation = m.getAnnotation(Description.class);
+                    System.out.println("method = "+annotation.value());
+                }
+            }
+
+            for (Method m:methods){
+                Annotation[] annotations = m.getAnnotations();
+                for (Annotation annotation:annotations){
+                    if (annotation instanceof Description){
+                        System.out.println("第二种方法 = "+((Description) annotation).value());
+                    }
+                }
+            }
+
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+}
+
+
+
+```
