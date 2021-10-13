@@ -121,7 +121,7 @@ public enum ElementType {
 public enum RetentionPolicy {
     /**
      * Annotations are to be discarded by the compiler.
-       只有在源码显示，编译时会丢弃
+     *  只有在源码显示，编译时会丢弃
      */
     SOURCE,
 
@@ -144,7 +144,24 @@ public enum RetentionPolicy {
 
 ```
 
+3.@Inherited 允许子类继承
+
+4.@Documented 生成javadoc时会包含注解
 
 ### 3.3使用自定义注解
+
+使用注解的语法
+
+@ <注解名>（<成员名1>=<成员值1>,<成员名2>=<成员值2>，....）
+
+```java
+
+  @Description(desc = "I am eyeColor",author = "Mooc boy",age = 18)
+    public String eyeColor(){
+        return "red";
+    }
+
+
+```
 
 ### 3.4 解析注解
