@@ -68,6 +68,83 @@ public @interface Description {
 
 ### 3.2 注解的注解（元注解）
 
+1.@Target({ElementType.METHOD,ElementType.TYPE})
+
+@Target 注解的作用域
+
+```java
+public enum ElementType {
+  
+    /** 类，接口 */
+    TYPE,
+
+    /** 字段声明  */
+    FIELD,
+
+    /** 方法声明 */
+    METHOD,
+
+    /** 参数声明 */
+    PARAMETER,
+
+    /** 构造方法声明 */
+    CONSTRUCTOR,
+
+    /** 局部变量声明 */
+    LOCAL_VARIABLE,
+
+    /** Annotation type declaration */
+    ANNOTATION_TYPE,
+
+    /** 包声明 */
+    PACKAGE,
+
+    /**
+     * Type parameter declaration
+     *
+     * @since 1.8
+     */
+    TYPE_PARAMETER,
+
+    /**
+     * Use of a type
+     *
+     * @since 1.8
+     */
+    TYPE_USE
+}
+```
+
+2.@Retention 注解的生命周期
+
+```java
+public enum RetentionPolicy {
+    /**
+     * Annotations are to be discarded by the compiler.
+       只有在源码显示，编译时会丢弃
+     */
+    SOURCE,
+
+    /**
+     * Annotations are to be recorded in the class file by the compiler
+     * but need not be retained by the VM at run time.  This is the default
+     * behavior.
+     * 编译时会记录到class中，运行时忽略
+     */
+    CLASS,
+
+    /**
+     * Annotations are to be recorded in the class file by the compiler and
+     * retained by the VM at run time, so they may be read reflectively.
+     * 运行时存在，可以通过反射读取
+     * @see java.lang.reflect.AnnotatedElement
+     */
+    RUNTIME
+}
+
+```
+
+
 ### 3.3使用自定义注解
 
 ### 3.4 解析注解
